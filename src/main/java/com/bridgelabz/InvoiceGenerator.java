@@ -2,17 +2,14 @@ package com.bridgelabz;
 
 public class InvoiceGenerator {
 
+	private static final int MINIMUM_FARE = 5;
+	private static final double COST_PER_TIME = 1;
+	private static final double MIN_COST_PER_KILOMETER = 10;
+
 	/*
 	 * Here we are creating Method for calculating Fare
 	 */
-
-	int MINIMUM_FARE = 5;
-	int COST_PER_TIME = 0;
-	double MIN_COST_PER_KILOMETER = 10;
-
 	public double calculateFare(double distance, int time) {
-		int MIN_COST_PER_KILOMETER = 10;
-		int COST_PER_TIME = 1;
 		double totalFare = distance * MIN_COST_PER_KILOMETER + time * COST_PER_TIME;
 
 		if (totalFare < MINIMUM_FARE) {
@@ -21,4 +18,12 @@ public class InvoiceGenerator {
 		return totalFare;
 	}
 
+	public double calculateFare(Ride[] rides) {
+		double totalfare = 0;
+		for (Ride ride : rides) {
+			totalfare += this.calculateFare(ride.distance, ride.time);
+		}
+		return totalfare;
+
+	}
 }
