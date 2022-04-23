@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class InvoiceServiceTest {
-
 	@Test
 	public void givenDistanceAndTimeShouldReturnFare() {
 		InvoiceGenerator invoiceGenerataor = new InvoiceGenerator();
