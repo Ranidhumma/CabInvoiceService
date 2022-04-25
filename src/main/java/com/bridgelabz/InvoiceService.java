@@ -3,7 +3,7 @@ package com.bridgelabz;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InvoiceService  {
+public class InvoiceService {
 
 	private static final int MINIMUM_FARE = 5;
 	private static final double COST_PER_TIME = 1;
@@ -26,7 +26,12 @@ public class InvoiceService  {
 	public InvoiceSummary calculateFare(Ride[] rides) {
 		double totalfare = 0;
 		for (Ride ride : rides) {
-			totalfare += this.calculateFare(ride.distance, ride.time);
+			if (ride.Type != null) {
+				totalfare += ride.Type.calculateCategoryType(ride.distance, ride.time);
+			}
+
+			else
+				totalfare += this.calculateFare(ride.distance, ride.time);
 		}
 		return new InvoiceSummary(rides.length, totalfare);
 
@@ -35,7 +40,7 @@ public class InvoiceService  {
 	public InvoiceSummary getInvoiceSummary(String userId) {
 		// TODO Auto-generated method stub
 		Ride[] rides = rideRepository.get(userId);
-		return new InvoiceService ().calculateFare(rides);
+		return new InvoiceService().calculateFare(rides);
 
 	}
 
